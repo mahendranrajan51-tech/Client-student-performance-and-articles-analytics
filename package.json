@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
@@ -16,6 +17,7 @@
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.81.0",
     "react-router-dom": "^7.1.1",
     "student-performance-article-analytics": "file:..",
     "vite": "^6.0.7"
