@@ -31,7 +31,6 @@ export default function TeacherDashboard() {
       <section className="dashboard-grid">
         <article className="panel"><h2>Articles vs Views</h2><BarChart labels={views.map((x) => x.title)} values={views.map((x) => x.views)} label="Views" /></article>
         <article className="panel"><h2>Category Distribution</h2><PieChart labels={categories.map((x) => x._id)} values={categories.map((x) => x.views)} label="Views" /></article>
-        <article className="panel wide"><h2>Daily Engagement</h2><LineChart labels={days.map((x) => x._id)} values={days.map((x) => x.duration)} label="Seconds read" /></article>
       </section>
 
       <section className="panel">
