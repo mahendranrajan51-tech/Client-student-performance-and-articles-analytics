@@ -10,6 +10,10 @@ export default function ArticleList() {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
+    Object.keys(sessionStorage)
+      .filter((key) => key.startsWith("article-viewed-"))
+      .forEach((key) => sessionStorage.removeItem(key));
+
     http.get("/articles").then(({ data }) => setArticles(data));
   }, []);
 

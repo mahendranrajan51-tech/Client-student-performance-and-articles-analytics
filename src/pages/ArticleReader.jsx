@@ -74,7 +74,13 @@ export default function ArticleReader() {
 
   useEffect(() => {
     http.get(`/articles/${id}`).then(({ data }) => setArticle(data));
-    http.post("/tracking/view", { articleId: id });
+
+    const viewKey = `article-viewed-${id}`;
+    if (!sessionStorage.getItem(viewKey)) {
+      sessionStorage.setItem(viewKey, "true");
+      http.post("/tracking/view", { articleId: id });
+    }
+
     startRef.current = Date.now();
 
     const sendDuration = () => {
