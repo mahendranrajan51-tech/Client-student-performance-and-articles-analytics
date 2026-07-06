@@ -69,10 +69,20 @@ export default function ArticleReader() {
   const [selectedText, setSelectedText] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("");
-  const startRef = useRef(Date.now());
-  const sentRef = useRef(false);
+  const cleanupTimerRef = useRef(null);
 
   useEffect(() => {
+    if (cleanupTimerRef.current?.articleId === id) {
+      clearTimeout(cleanupTimerRef.current.timer);
+      cleanupTimerRef.current = null;
+    }
+
+    const readingSession = {
+      articleId: id,
+      start: Date.now(),
+      sent: false
+    };
+
     http.get(`/articles/${id}`).then(({ data }) => setArticle(data));
 
     const viewKey = `article-viewed-${id}`;
@@ -81,19 +91,26 @@ export default function ArticleReader() {
       http.post("/tracking/view", { articleId: id });
     }
 
-    startRef.current = Date.now();
-
     const sendDuration = () => {
-      if (sentRef.current) return;
-      sentRef.current = true;
-      const duration = Math.max(1, (Date.now() - startRef.current) / 1000);
-      http.put("/tracking/duration", { articleId: id, duration }).catch(() => {});
+      if (readingSession.sent) return;
+      readingSession.sent = true;
+      const duration = Math.max(1, (Date.now() - readingSession.start) / 1000);
+      http.put("/tracking/duration", { articleId: readingSession.articleId, duration }).catch(() => {});
     };
 
     window.addEventListener("beforeunload", sendDuration);
+    window.addEventListener("pagehide", sendDuration);
     return () => {
       window.removeEventListener("beforeunload", sendDuration);
-      sendDuration();
+      window.removeEventListener("pagehide", sendDuration);
+
+      const timer = setTimeout(() => {
+        sendDuration();
+        if (cleanupTimerRef.current?.timer === timer) {
+          cleanupTimerRef.current = null;
+        }
+      }, 0);
+      cleanupTimerRef.current = { articleId: id, timer };
     };
   }, [id]);
 
