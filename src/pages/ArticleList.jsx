@@ -46,11 +46,11 @@ export default function ArticleList() {
           <h2>Explore articles</h2>
           <p>Find lessons by title, content, or category and continue reading at your own pace.</p>
         </div>
-        <div className="article-count">
+        {/* <div className="article-count">
           <BookOpen size={20} />
           <strong>{filtered.length}</strong>
           <span>{filtered.length === 1 ? "Article" : "Articles"}</span>
-        </div>
+        </div> */}
       </section>
 
       <section className="panel article-toolbar">

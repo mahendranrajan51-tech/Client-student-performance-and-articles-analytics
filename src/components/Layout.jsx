@@ -67,7 +67,7 @@ export default function Layout({ children }) {
         </nav>
         <div className="sidebar-note">
           <Sparkles size={18} />
-          <span>Keep each lesson focused and easy to explore.</span>
+          <span>Keep each lesson.</span>
         </div>
         <button className="ghost-button" onClick={onLogout}><LogOut size={18} />Logout</button>
       </aside>
