@@ -36,12 +36,26 @@ export default function TeacherDashboard() {
       <section className="panel">
         <div className="section-title"><h2>Articles</h2><Link className="button-link" to="/teacher/articles/new">Create Article</Link></div>
         <div className="table">
-          {articles.map((article) => (
-            <div className="table-row" key={article._id}>
-              <span>{article.title}</span><span>{article.category}</span>
-              <Link to={`/teacher/articles/${article._id}/edit`}><Edit size={17} /> Edit</Link>
-            </div>
-          ))}
+          <table>
+            <thead>
+              <tr>
+                <th>Article</th>
+                <th>Category</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {articles.map((article) => (
+                <tr key={article._id}>
+                  <td>{article.title}</td>
+                  <td>{article.category}</td>
+                  <td>
+                    <Link to={`/teacher/articles/${article._id}/edit`}><Edit size={17} /> Edit</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     </Layout>

@@ -23,23 +23,51 @@ export default function StudentDashboard() {
       <section className="dashboard-grid">
         <article className="panel"><h2>Reading Time per Category</h2><PieChart labels={categoryTime.map((x) => x._id)} values={categoryTime.map((x) => x.duration)} label="Reading Time" valueFormatter={formatDuration} /></article>
         <article className="panel">
-          <h2>Read Articles</h2>
-          <div className="table"> 
-            {(analytics?.readArticles || []).map((item) => (
-              <div className="table-row" key={item._id}>
-                <span>{item.articleId?.title}</span><span>{item.articleId?.category}</span><span>{formatDuration(item.duration)}</span>
-              </div>
-            ))}
+          <div className="section-title">
+            <h2>Read Articles</h2>
+          </div>
+          <div className="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Article</th>
+                  <th>Category</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(analytics?.readArticles || []).map((item) => (
+                  <tr key={item._id}>
+                    <td>{item.articleId?.title}</td>
+                    <td>{item.articleId?.category}</td>
+                    <td>{formatDuration(item.duration)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </article>
         <article className="panel wide">
           <h2>Highlights</h2>
           <div className="table">
-            {(analytics?.highlights || []).map((item) => (
-              <div className="table-row" key={item._id}>
-                <span>{item.text}</span><span>{item.note || "No note"}</span><span>{item.articleId?.title}</span>
-              </div>
-            ))}
+            <table>
+              <thead>
+                <tr>
+                  <th>Highlight</th>
+                  <th>Note</th>
+                  <th>Article</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(analytics?.highlights || []).map((item) => (
+                  <tr key={item._id}>
+                    <td>{item.text}</td>
+                    <td>{item.note || "No note"}</td>
+                    <td>{item.articleId?.title}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </article>
       </section>

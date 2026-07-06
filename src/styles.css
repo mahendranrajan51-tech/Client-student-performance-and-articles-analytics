@@ -409,6 +409,27 @@ video {
   margin-top: 14px;
 }
 
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #e2e8f0;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.table th {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
 .table-row {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
